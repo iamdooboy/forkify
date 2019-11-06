@@ -1,6 +1,6 @@
 import Search from './models/Search';
 import * as searchView from './views/searchView';
-import { elements } from './views/base';
+import { elements, renderLoader, clearLoader } from './views/base';
 
 /* Global state of the app
 - search object
@@ -16,22 +16,25 @@ const controlSearch = async () => {
 
     if(query) {
         // new search object and add to state
-        state.search = new Search(query);
+        state.search = new Search(query);               //create new search object 
 
         //prepare UI for results
-        searchView.clearInput();
-        searchView.clearResults();
+        searchView.clearInput();                        //clear textfields
+        searchView.clearResults();                      //clear search results
+        renderLoader(elements.searchRes);               //load spinner
+
 
         //search for recipes
-        await state.search.getResults(); //return a promise
+        await state.search.getResults();                //get search result and return a promise
 
         //render results on UI
-        searchView.renderResults(state.search.result);
+        clearLoader();                                  //clear spinner
+        searchView.renderResults(state.search.result);  //load results
 
     }
 }
 
-elements.searchForm.addEventListener('submit', e => {
-    e.preventDefault(); //prevent page from reloading
-    controlSearch();
+elements.searchForm.addEventListener('submit', e => {   //button click event
+    e.preventDefault();                                 //prevent page from reloading
+    controlSearch();                                    //init
 });
