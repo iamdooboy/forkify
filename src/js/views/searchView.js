@@ -55,8 +55,6 @@ const createButton = (page, type) => `
 const renderButtons = (page, numResults, resPerPage) => {
     const pages = Math.ceil(numResults / resPerPage);
     let button;
-    console.log(page);
-    console.log(pages);
 
     if(page === 1 ) {
         //button to go to next page
