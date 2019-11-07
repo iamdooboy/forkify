@@ -49,6 +49,7 @@ elements.searchForm.addEventListener('submit', e => {   //button click event
     controlSearch();                                    //init
 });
 
+//event listener for button click that is closest
 elements.searchResPages.addEventListener('click', e => {
     const btn = e.target.closest('.btn-inline');                    //click on prev or next btn
     if(btn) {
@@ -75,7 +76,7 @@ const controlRecipe = async () => {
         if(state.search){
             searchView.highLightSelected(id);
         }
-        
+
         //create new recipe object
         state.recipe = new Recipe(id);
 
@@ -102,3 +103,19 @@ const controlRecipe = async () => {
 // window.addEventListener('load', controlRecipe);
 
 ['hashchange', 'load'].forEach(event => window.addEventListener(event, controlRecipe));
+
+//handling recipe btn clicks
+elements.recipe.addEventListener('click', e => {
+    if(e.target.matches('.btn-decrease, .btn-decrease *')) { //* - any child
+        //Decrease button is clicked
+        if(state.recipe.servings > 1) {
+            state.recipe.updateServings('dec');
+            recipeView.updateServingsIngredients(state.recipe);
+        }
+    } else if(e.target.matches('.btn-increase, .btn-increase *')) {
+        //Increase button is clicked
+        state.recipe.updateServings('inc');
+        recipeView.updateServingsIngredients(state.recipe);
+    }
+    console.log(state.recipe);
+});
