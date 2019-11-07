@@ -1,5 +1,4 @@
 import { elements } from './base';
-import { create } from 'domain';
 
 export const getInput = () => elements.searchInput.value;
 
