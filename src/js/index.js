@@ -14,8 +14,8 @@ import Likes from './models/Likes';
 - shopping list object
 - liked recipes
 */
+
 const state = {};
-window.state = state;
 
 /*
 ****** SEARCH CONTROLLER *****
@@ -70,7 +70,6 @@ elements.searchResPages.addEventListener('click', e => {
 const controlRecipe = async () => {
     // get ID from URL
     const id = window.location.hash.replace('#', '');
-    console.log(id);
 
     if(id) {
         //prepare UI for changes
@@ -221,5 +220,3 @@ elements.recipe.addEventListener('click', e => {
         controlLike();
     }
 });
-
-window.l = new List();
